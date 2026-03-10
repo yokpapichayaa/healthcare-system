@@ -64,6 +64,7 @@ export function FormField({ field, value, error, touched, onChange, onBlur }: Fo
         pointerEvents: "none",
         whiteSpace: "nowrap",
         lineHeight: 1,
+        zIndex: 2,
       }}>
         {field.label}
         {field.required && <span style={{ color: "#f87171", marginLeft: 2 }}>*</span>}
@@ -74,7 +75,7 @@ export function FormField({ field, value, error, touched, onChange, onBlur }: Fo
         <div style={{ position: "relative" }}>
           <select {...shared} style={{
             ...inputStyle,
-            background: "#0a0f1a",
+            background: float ? "#0a0f1a" : "transparent",
             appearance: "none",
             WebkitAppearance: "none",
             cursor: "pointer",
