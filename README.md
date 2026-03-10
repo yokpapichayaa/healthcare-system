@@ -10,8 +10,8 @@
 
 | ส่วนงาน | URL |
 |---------|-----|
-| 👤 Patient Form | `https://your-deployment.vercel.app/patient` |
-| 🖥 Staff View | `https://your-deployment.vercel.app/staff` |
+| 👤 Patient Form | `https://healthcare-system-lyart.vercel.app/patient` |
+| 🖥 Staff View | `https://healthcare-system-lyart.vercel.app/staff` |
 
 > **ทดสอบ Real-Time Sync:** เปิดทั้งสอง URL ในแท็บแยกกันพร้อมกัน ทุกการพิมพ์บน Patient Form จะปรากฏบน Staff View ทันที
 
