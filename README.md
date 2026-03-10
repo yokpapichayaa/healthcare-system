@@ -1,4 +1,4 @@
-# Agnos Patient System
+# Patient System
 
 ระบบลงทะเบียนผู้ป่วยและติดตามข้อมูลแบบ Real-Time — พัฒนาขึ้นเป็นส่วนหนึ่งของ **Agnos Frontend Developer Candidate Assignment**
 
