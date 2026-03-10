@@ -17,8 +17,7 @@ export function StaffFieldGrid({ section, data, updatedKeys }: StaffFieldGridPro
   return (
     <section>
       {/* Section header */}
-      <div className="section-divider">
-        <span className="text-sm">{section.icon}</span>
+      <div className="section-divider py-3">
         <h2 className="text-xs font-semibold tracking-widest uppercase text-slate-600">
           {section.title}
         </h2>
