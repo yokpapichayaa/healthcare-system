@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sora:    "Sora", sans-serif;
+    --font-dm-sans: "DM Sans", sans-serif;
+    --accent:       #00c896;
+    --accent2:      #0ea5e9;
+    --bg:           #0a0f1a;
+    --surface:      #0f1624;
+    --card:         #131c2e;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-tap-highlight-color: transparent; }
+
+  ::-webkit-scrollbar          { width: 4px; }
+  ::-webkit-scrollbar-track    { background: transparent; }
+  ::-webkit-scrollbar-thumb    { background: #1e2d45; border-radius: 99px; }
+
+  /* Date input — hide placeholder until focused or filled */
+  input[type="date"]::-webkit-datetime-edit          { color: transparent; }
+  input[type="date"]:focus::-webkit-datetime-edit,
+  input[type="date"].has-value::-webkit-datetime-edit { color: #f0f4f8; }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.4); cursor: pointer; opacity: 0.6;
+  }
+
+  /* Base input reset — actual styling via .hc-input */
+  input, select, textarea {
+    font-family: inherit;
+    font-size: max(16px, 0.875rem);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  @media (min-width: 640px) {
+    input, select, textarea { font-size: 0.875rem; }
+  }
+
+  textarea { resize: none; }
+  select option { background: #0f1624; color: #f0f4f8; }
+}
+
+@layer components {
+
+  /* ── Floating-label input wrapper ── */
+  .hc-field {
+    @apply relative pt-5;
+  }
+
+  .hc-label {
+    @apply absolute left-0 text-sm font-normal pointer-events-none
+           transition-all duration-200;
+    top: 28px;
+    color: #2d4a5a;
+  }
+  .hc-label.floating {
+    top: 0;
+    @apply text-[10px] font-semibold tracking-widest uppercase;
+    color: #4a8070;
+  }
+  .hc-label.focused { color: #00c896; }
+
+  .hc-input {
+    @apply w-full bg-transparent border-0 border-b text-slate-100
+           pb-2 pt-1 text-sm transition-colors duration-200;
+    border-color: rgba(255,255,255,0.1);
+    color-scheme: dark;
+  }
+  .hc-input:focus        { border-color: #00c896; }
+  .hc-input.error        { border-color: #f87171; }
+  .hc-input.is-select    {
+    @apply cursor-pointer;
+    background: #0a0f1a;
+  }
+
+  /* Animated gradient line on focus */
+  .hc-focus-line {
+    @apply absolute bottom-0 left-0 right-0 h-[2px] rounded-sm pointer-events-none;
+    background: linear-gradient(90deg, #00c896, #0ea5e9, #00c896);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+
+  .hc-opt-badge {
+    @apply absolute right-0 top-0 text-[9px] tracking-widest uppercase;
+    color: #2d4a5a;
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply relative flex-[2] py-3.5 rounded-xl text-sm font-semibold
+           text-white border-0 cursor-pointer;
+    background: linear-gradient(90deg, #00c896, #0ea5e9, #00c896);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+    box-shadow: 0 4px 24px rgba(0,200,150,0.3);
+    min-height: 44px;
+  }
+  .btn-ghost {
+    @apply flex-1 py-3.5 rounded-xl text-sm font-semibold cursor-pointer
+           border transition-colors duration-200;
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.08);
+    color: #4a6070;
+    min-height: 44px;
+  }
+
+  /* Pulse-ring hover — desktop only */
+  @media (hover: hover) {
+    .btn-primary:hover { animation: shimmer 2s linear infinite, pulseGlow 1s ease infinite; }
+    .btn-ghost:hover   { animation: pulseGlowSubtle 1s ease infinite; }
+    .tab-btn:hover     { animation: pulseGlowSubtle 1s ease infinite; }
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    @apply flex items-center gap-3 mb-6;
+  }
+  .section-header::after {
+    content: "";
+    @apply flex-1 h-px;
+    background: rgba(255,255,255,0.05);
+  }
+  .section-icon {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center shrink-0;
+    background: linear-gradient(135deg, rgba(0,200,150,0.15), rgba(14,165,233,0.15));
+    border: 1px solid rgba(0,200,150,0.2);
+  }
+
+  /* ── Staff field card ── */
+  .staff-field {
+    @apply rounded-xl p-3 transition-all duration-300;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .staff-field.filled {
+    background: rgba(0,200,150,0.06);
+    border-color: rgba(0,200,150,0.2);
+  }
+  .staff-field.updated {
+    animation: fieldPulse 0.8s ease;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes shimmer       { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+@keyframes pulseGlow     { 0%,100%{box-shadow:0 0 0 0 rgba(0,200,150,0.5)} 50%{box-shadow:0 0 0 7px rgba(0,200,150,0)} }
+@keyframes pulseGlowSubtle { 0%,100%{box-shadow:0 0 0 0 rgba(0,200,150,0.25)} 50%{box-shadow:0 0 0 6px rgba(0,200,150,0)} }
+@keyframes fieldPulse    { 0%{box-shadow:0 0 0 0 rgba(0,200,150,0.4)} 100%{box-shadow:0 0 0 8px rgba(0,200,150,0)} }
+@keyframes fadeUp        { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes ping          { 75%,100%{transform:scale(2);opacity:0} }
+@keyframes dotBlink      { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes glowPulse     { 0%,100%{opacity:1} 50%{opacity:0.35} }
